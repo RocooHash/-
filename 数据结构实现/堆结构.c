@@ -12,8 +12,9 @@ struct HNode {
     int Size;          /* 堆中当前元素个数 */
     int Capacity;      /* 堆的最大容量 */
 };
-typedef Heap MaxHeap; /* 最大堆 */
 typedef Heap MinHeap; /* 最小堆 */
+typedef Heap MaxHeap; /* 最大堆 */
+
  
 #define MAXDATA 1000  /* 该值应根据具体情况定义为大于堆中所有可能元素的值 */
  
