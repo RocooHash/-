@@ -1,3 +1,7 @@
+/**
+ * name:06-图1 列出连通集
+*/
+
 #include <stdio.h>
 #include <stdlib.h>
 

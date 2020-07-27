@@ -1,8 +1,15 @@
+/**
+ * name:05-树9 Huffman Codes
+*/
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #define MINDATA -10001
 #define ERROR NULL
+#define true 1
+#define false 0
+
 //哈夫曼树结点
 typedef struct TreeNode *HuffmanTree;
 struct TreeNode{
@@ -14,7 +21,7 @@ struct TreeNode{
 typedef struct HNode *Heap;
 typedef Heap MaxHeap;
 typedef Heap MinHeap;
-typedef TreeNode ElementType;	//堆中每个结点都是哈夫曼树结点的类型
+typedef struct TreeNode ElementType;	//堆中每个结点都是哈夫曼树结点的类型
 struct HNode {
 	ElementType *Data;
 	int Size;
@@ -32,11 +39,11 @@ MinHeap CreateHeap( int MaxSize ) {
 	return H;
 }
  
-bool IsFull( MinHeap H ){
+int IsFull( MinHeap H ){
 	return (H->Size == H->Capacity);
 }
  
-bool Insert( MinHeap H, HuffmanTree T ) {
+int Insert( MinHeap H, HuffmanTree T ) {
 	//将元素X插入堆，其中H->Data[0]已经定义为哨兵
 	int i;
 	if( IsFull(H) ){
@@ -50,7 +57,7 @@ bool Insert( MinHeap H, HuffmanTree T ) {
 	return true;
 }
  
-bool IsEmpty( MinHeap H ) {
+int IsEmpty( MinHeap H ) {
 	return (H->Size == 0);
 }
  
@@ -152,7 +159,7 @@ void DestroyTree ( HuffmanTree T ) {
 	}
 }
  
-bool Judge ( int N, int *f, int CodeLen ) {
+int Judge ( int N, int *f, int CodeLen ) {
 	HuffmanTree T = (HuffmanTree)malloc(sizeof(struct TreeNode));
 	HuffmanTree Tmp;
 	T = CreateHuffmanNode(0);
@@ -257,9 +264,5 @@ int main(){
 			printf("No\n");
 		}
 	}
-	//traverseHeap(H);
-	//traverseHuffman(T);
-	//printf("%d", CodeLen);
-	system("pause");
 	return 0;
 }

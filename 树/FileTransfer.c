@@ -1,4 +1,6 @@
-/*url:https://pintia.cn/problem-sets/1268384564738605056/problems/1278908289143574529*/
+/**
+ * name:05-树8 File Transfer
+*/
 
 #include <stdio.h>
 #include <stdlib.h>
