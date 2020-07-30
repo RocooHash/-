@@ -13,7 +13,7 @@ struct vertex
 typedef struct vertex * Vertex;
 struct edgenode
 {
-	int edgei;
+	int edge;
 	struct edgenode * Next;
 };
 typedef struct edgenode * Edge;
@@ -29,11 +29,15 @@ struct graph//邻接表存储图
 	struct gnode * Gnode;
 };
 typedef struct graph * Graph;
+
 Graph Creategraph(int N);
 double distance(int x1, int y1, int x2, int y2);//计算两点之间的距离
 void DFS(Graph G, int i, int D);//深度优先搜索
+
 int * Visited;
 int yes = 0;//yes==1表示可以上岸，yes==0表示不能上岸
+
+
 int main()
 {
 	int i;
@@ -61,7 +65,7 @@ int main()
 			{
 				Edge Newnode;
 				Newnode = (Edge)malloc(sizeof(struct edgenode));
-				Newnode->edgei = j;
+				Newnode->edge = j;
 				Newnode->Next = G->Gnode[i].firstedge;
 				G->Gnode[i].firstedge = Newnode;
 			}
@@ -82,6 +86,7 @@ int main()
 	else { printf("Yes"); }
 	return 0;
 }
+
 Graph Creategraph(int N)
 {
 	Graph G;
@@ -97,12 +102,14 @@ Graph Creategraph(int N)
 	}
 	return G;
 }
+
 double distance(int x1, int y1, int x2, int y2)
 {
 	double d;
 	d = sqrt((x1 - x2)*(x1 - x2) + (y1 - y2) * (y1 - y2));
 	return d;
 }
+
 void DFS(Graph G, int i, int D)//深度优先搜索
 {
 	Visited[i] = 1;
@@ -116,16 +123,16 @@ void DFS(Graph G, int i, int D)//深度优先搜索
 		p = G->Gnode[i].firstedge;
 		while (p != NULL)
 		{
-			if (Visited[p->edgei] == 0)
+			if (Visited[p->edge] == 0)
 			{
-				Visited[p->edgei] = 1;
-				if (G->Gnode[p->edgei].data->x + D >= 50 || G->Gnode[p->edgei].data->x - D <= -50 || G->Gnode[p->edgei].data->y + D >= 50 || G->Gnode[p->edgei].data->y - D <= -50)//中间某点可以上岸
+				Visited[p->edge] = 1;
+				if (G->Gnode[p->edge].data->x + D >= 50 || G->Gnode[p->edge].data->x - D <= -50 || G->Gnode[p->edge].data->y + D >= 50 || G->Gnode[p->edge].data->y - D <= -50)//中间某点可以上岸
 				{
 					yes = 1;
 				}
 				else
 				{
-					DFS(G, p->edgei, D);
+					DFS(G, p->edge, D);
 				}
 			}
 			p = p->Next;
