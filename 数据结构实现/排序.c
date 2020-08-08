@@ -72,14 +72,46 @@ void Selection_Sort(int a[], int N)
     }
 }
 
-/**
- * name: 堆排序
- * 详见 堆结构.c
-*/
+/*快速排序,以最后一位为基准*/
+void quick_sort(int A[], int start, int end)
+{
+    if (start >= end)
+    {
+        return;
+    }
+    int left = start, right = end - 1, mid = A[end];
+    while (left < right)
+    {
+        while (A[left] < mid && left < right)
+        {
+            left++;
+        }
+        while (A[right] >= mid && left < right)
+        {
+            right--;
+        }
+        int temp = A[right];
+        A[right] = A[left];
+        A[left] = temp;
+    }
+    if (A[left] >= A[end])
+    {
+        int temp = A[end];
+        A[end] = A[left];
+        A[left] = temp;
+    }
+    else
+    {
+        left++;
+    }
+    if (left)
+    {
+        quick_sort(A, start, left - 1);
+    }
+    quick_sort(A, left + 1, end);
+}
 
-/* 归并排序 - 递归实现 */
-
-/* L = 左边起始位置, R = 右边起始位置, RightEnd = 右边终点位置*/
+/* 归并排序 - 递归实现    * L = 左边起始位置, R = 右边起始位置, RightEnd = 右边终点位置*/
 void Merge(int A[], int TmpA[], int L, int R, int RightEnd)
 { /* 将有序的A[L]~A[R-1]和A[R]~A[RightEnd]归并成一个有序序列 */
     int LeftEnd, NumElements, Tmp;
@@ -138,16 +170,16 @@ int main()
     int N;
     scanf("%d", &N);
     int a[N], i;
-    for(i =0 ;i<N;i++)
+    for (i = 0; i < N; i++)
     {
         scanf("%d", &a[i]);
     }
     MergeSort(a, N);
-    for (i = 0; i < N-1; i++)
+    for (i = 0; i < N - 1; i++)
     {
         printf("%d ", a[i]);
     }
-    printf("%d",a[i]);
+    printf("%d", a[i]);
 }
 
 /* 归并排序 - 循环实现 */
