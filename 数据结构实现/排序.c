@@ -165,6 +165,37 @@ void MergeSort(int A[], int N)
         printf("空间不足");
 }
 
+void odd_even_sort(int arr[], int len)
+{
+    int odd_even, i;
+    int temp;
+    int sorted = 0;
+    int cost = 0;
+    while (!sorted)
+    {
+        sorted = 1;
+        for (odd_even = 0; odd_even < 2; odd_even++)
+        {
+            for (i = odd_even; i < len - 1; i += 2)
+            {
+                cost++;
+                if (arr[i] > arr[i + 1])
+                {
+                    temp = arr[i];
+                    arr[i] = arr[i + 1];
+                    arr[i + 1] = temp;
+                    sorted = 0;
+                }
+            }
+        }
+    }
+    printf("%d\n", cost);
+    for (i = 0; i < len; i++)
+    {
+        printf("%d ", arr[i]);
+    }
+}
+
 int main()
 {
     int N;
@@ -174,12 +205,7 @@ int main()
     {
         scanf("%d", &a[i]);
     }
-    MergeSort(a, N);
-    for (i = 0; i < N - 1; i++)
-    {
-        printf("%d ", a[i]);
-    }
-    printf("%d", a[i]);
+    odd_even_sort(a, N);
 }
 
 /* 归并排序 - 循环实现 */
